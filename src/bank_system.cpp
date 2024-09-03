@@ -33,6 +33,7 @@ void BankSystem::saveAccounts(const std::string &filename) {
 }
 
 BankSystem::BankSystem(const std::string &filename) {
+    nextAccountNumber = 1;
     loadAccounts(filename);
 }
 
@@ -47,7 +48,7 @@ void BankSystem::createAccount(const std::string &name, double initialBalance) {
 
 void BankSystem::deposit(int accountNumber, double amount) {
     int l = 0, r = accounts.size();
-    while (r - l >= 1) {
+    while (r - l > 1) {
         int m = (l + r) / 2;
         if (accounts[m].getAccountNumber() <= accountNumber) {
             l = m;
@@ -64,7 +65,7 @@ void BankSystem::deposit(int accountNumber, double amount) {
 
 void BankSystem::withdraw(int accountNumber, double amount) {
     int l = 0, r = accounts.size();
-    while (r - l >= 1) {
+    while (r - l > 1) {
         int m = (l + r) / 2;
         if (accounts[m].getAccountNumber() <= accountNumber) {
             l = m;
@@ -81,7 +82,7 @@ void BankSystem::withdraw(int accountNumber, double amount) {
 
 double BankSystem::getBalance(int accountNumber) {
     int l = 0, r = accounts.size();
-    while (r - l >= 1) {
+    while (r - l > 1) {
         int m = (l + r) / 2;
         if (accounts[m].getAccountNumber() <= accountNumber) {
             l = m;
@@ -98,7 +99,7 @@ double BankSystem::getBalance(int accountNumber) {
 
 void BankSystem::transfer(int senderAccountNumber, int recipientAccountNumber, double amount) {
     int l = 0, r = accounts.size();
-    while (r - l >= 1) {
+    while (r - l > 1) {
         int m = (l + r) / 2;
         if (accounts[m].getAccountNumber() <= senderAccountNumber) {
             l = m;
@@ -109,7 +110,7 @@ void BankSystem::transfer(int senderAccountNumber, int recipientAccountNumber, d
     if (accounts[l].getAccountNumber() == senderAccountNumber) {
         int senderIndex = l;
         l = 0, r = accounts.size();
-        while (r - l >= 1) {
+        while (r - l > 1) {
             int m = (l + r) / 2;
             if (accounts[m].getAccountNumber() <= recipientAccountNumber) {
                 l = m;
